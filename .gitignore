@@ -1,0 +1,6 @@
+node_modules/
+web/.env
+datomic/
+datomic-data/
+bridge/out/
+*.log

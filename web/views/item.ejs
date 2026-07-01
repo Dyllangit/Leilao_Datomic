@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title><%= item.nome %> - Leilao</title>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <main class="conteudo" data-item-id="<%= item.id %>">
+    <p><a href="/itens">&larr; Voltar para os itens</a></p>
+
+    <h1 id="nome-item"><%= item.nome %></h1>
+    <% if (item.imagemUrl) { %>
+      <img class="imagem-item" src="<%= item.imagemUrl %>" alt="<%= item.nome %>" />
+    <% } %>
+    <p id="descricao-item"><%= item.descricao %></p>
+
+    <p class="status status-<%= item.status %>" id="status-item">
+      <%= item.status === 'ativo' ? 'Leilao ativo' : 'Leilao encerrado' %>
+    </p>
+    <% if (item.dataEncerramento) { %>
+      <p class="data-encerramento">Encerra em: <span id="data-encerramento"><%= new Date(item.dataEncerramento).toLocaleString('pt-BR') %></span></p>
+    <% } %>
+
+    <p class="lance-atual-detalhe">
+      Lance atual: <strong id="valor-lance-atual">R$ <%= item.lanceAtual %></strong>
+      <span id="lance-atual-nome"><% if (item.lanceAtualNome) { %>(por <%= item.lanceAtualNome %>)<% } %></span>
+    </p>
+
+    <% if (erro) { %>
+      <p class="mensagem-erro"><%= erro %></p>
+    <% } %>
+    <% if (ok) { %>
+      <p class="mensagem-sucesso">Lance registrado com sucesso!</p>
+    <% } %>
+
+    <form id="form-lance" action="/itens/<%= item.id %>/lances" method="POST" class="<%= item.status !== 'ativo' ? 'oculto' : '' %>">
+      <label for="valor">Seu lance (R$)</label>
+      <input type="number" step="0.01" min="0" name="valor" id="valor" required />
+      <button type="submit">Dar lance</button>
+    </form>
+    <p id="leilao-encerrado-aviso" class="<%= item.status === 'ativo' ? 'oculto' : '' %>">Este leilao ja foi encerrado.</p>
+
+    <h2>Historico de lances</h2>
+    <ul id="lista-lances" class="lista-lances">
+      <% item.lances.forEach(function(l) { %>
+        <li><strong><%= l.nomeUsuario %></strong> - R$ <%= l.valor %> - <%= new Date(l.dataHora).toLocaleString('pt-BR') %></li>
+      <% }); %>
+      <% if (item.lances.length === 0) { %>
+        <li class="sem-lances">Nenhum lance ainda.</li>
+      <% } %>
+    </ul>
+  </main>
+  <script src="/js/poll-item.js"></script>
+</body>
+</html>

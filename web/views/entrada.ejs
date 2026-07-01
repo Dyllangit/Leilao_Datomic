@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Entrar - Leilao</title>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <div class="pagina-central">
+    <div class="cartao-entrada">
+      <h1>Bem-vindo ao Leilao</h1>
+      <p>Digite seu nome para ver os itens e dar lances.</p>
+      <% if (erro) { %>
+        <p class="mensagem-erro"><%= erro %></p>
+      <% } %>
+      <form action="/entrar" method="POST">
+        <input type="text" name="nome" placeholder="Seu nome" autofocus required maxlength="60" />
+        <button type="submit">Entrar</button>
+      </form>
+      <p class="ajuda-admin"><a href="/admin/login">Sou administrador</a></p>
+    </div>
+  </div>
+</body>
+</html>

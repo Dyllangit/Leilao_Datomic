@@ -1,0 +1,20 @@
+<header class="topo">
+  <a class="marca" href="/">Leilao</a>
+  <nav>
+    <% if (nomeUsuario) { %>
+      <span class="usuario-atual">Ola, <strong><%= nomeUsuario %></strong></span>
+      <a href="/itens">Itens</a>
+      <form action="/sair" method="POST" class="inline">
+        <button type="submit" class="link-botao">Sair</button>
+      </form>
+    <% } %>
+    <% if (isAdmin) { %>
+      <a href="/admin">Painel admin</a>
+      <form action="/admin/logout" method="POST" class="inline">
+        <button type="submit" class="link-botao">Sair do admin</button>
+      </form>
+    <% } else { %>
+      <a href="/admin/login">Area do administrador</a>
+    <% } %>
+  </nav>
+</header>

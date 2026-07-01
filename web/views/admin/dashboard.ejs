@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Painel do administrador</title>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/nav') %>
+  <main class="conteudo">
+    <div class="cabecalho-painel">
+      <h1>Painel do administrador</h1>
+      <a class="botao" href="/admin/novo">+ Novo item</a>
+    </div>
+
+    <% if (itens.length === 0) { %>
+      <p>Nenhum item publicado ainda.</p>
+    <% } %>
+
+    <table class="tabela-admin">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Status</th>
+          <th>Lance inicial</th>
+          <th>Lance atual</th>
+          <th>Lances</th>
+          <th>Encerramento</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% itens.forEach(function(item) { %>
+          <tr>
+            <td><a href="/itens/<%= item.id %>"><%= item.nome %></a></td>
+            <td class="status status-<%= item.status %>"><%= item.status === 'ativo' ? 'Ativo' : 'Encerrado' %></td>
+            <td>R$ <%= item.lanceInicial %></td>
+            <td>R$ <%= item.lanceAtual %><% if (item.lanceAtualNome) { %> (<%= item.lanceAtualNome %>)<% } %></td>
+            <td><%= item.totalLances %></td>
+            <td><%= item.dataEncerramento ? new Date(item.dataEncerramento).toLocaleString('pt-BR') : '-' %></td>
+            <td>
+              <% if (item.status === 'ativo') { %>
+                <form action="/admin/itens/<%= item.id %>/encerrar" method="POST" class="inline">
+                  <button type="submit" class="link-botao" onclick="return confirm('Encerrar este leilao?');">Encerrar</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

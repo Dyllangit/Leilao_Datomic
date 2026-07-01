@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Login administrador</title>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <div class="pagina-central">
+    <div class="cartao-entrada">
+      <h1>Area do administrador</h1>
+      <% if (erro) { %>
+        <p class="mensagem-erro"><%= erro %></p>
+      <% } %>
+      <form action="/admin/login" method="POST">
+        <input type="text" name="usuario" placeholder="Usuario" autofocus required />
+        <input type="password" name="senha" placeholder="Senha" required />
+        <button type="submit">Entrar</button>
+      </form>
+      <p class="ajuda-admin"><a href="/">Voltar</a></p>
+    </div>
+  </div>
+</body>
+</html>

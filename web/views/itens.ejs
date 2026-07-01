@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Itens em leilao</title>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <main class="conteudo">
+    <h1>Itens em leilao</h1>
+    <% if (itens.length === 0) { %>
+      <p>Nenhum item publicado ainda.</p>
+    <% } %>
+    <div class="grade-itens" id="grade-itens">
+      <% itens.forEach(function(item) { %>
+        <a class="cartao-item" href="/itens/<%= item.id %>" data-id="<%= item.id %>">
+          <h2><%= item.nome %></h2>
+          <p class="descricao"><%= item.descricao %></p>
+          <p class="lance-atual">
+            Lance atual: <strong class="valor-lance-atual">R$ <%= item.lanceAtual %></strong>
+          </p>
+          <p class="lance-nome">
+            <% if (item.lanceAtualNome) { %>
+              por <span class="nome-lance-atual"><%= item.lanceAtualNome %></span>
+            <% } else { %>
+              <span class="nome-lance-atual">nenhum lance ainda</span>
+            <% } %>
+          </p>
+          <p class="status status-<%= item.status %>"><%= item.status === 'ativo' ? 'Ativo' : 'Encerrado' %></p>
+        </a>
+      <% }); %>
+    </div>
+  </main>
+  <script src="/js/poll-itens.js"></script>
+</body>
+</html>
