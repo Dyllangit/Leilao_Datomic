@@ -2,6 +2,8 @@
 
 Sistema de leilao online. Usuarios entram so com um nome e dao lances nos itens publicados por um administrador. Veja o [PRD.md](PRD.md) para o detalhamento do produto.
 
+**No ar:** https://leilao-web-production.up.railway.app (deploy no Railway, veja [DEPLOY.md](DEPLOY.md) para detalhes da infra e como redeployar).
+
 ## Arquitetura
 
 ```

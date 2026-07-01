@@ -3,4 +3,6 @@ web/.env
 datomic/
 datomic-data/
 bridge/out/
+bridge/vendor/
+datomic-deploy/
 *.log
