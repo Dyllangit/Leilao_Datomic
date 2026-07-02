@@ -11,6 +11,7 @@ mkdir datomic-deploy\lib
 xcopy /e /i /y datomic\bin datomic-deploy\bin >nul
 xcopy /e /i /y datomic\resources datomic-deploy\resources >nul
 copy /y datomic\*.jar datomic-deploy\ >nul
+copy /y datomic\VERSION datomic-deploy\ >nul
 copy /y datomic\entrypoint.sh datomic-deploy\ >nul
 copy /y datomic\Dockerfile datomic-deploy\ >nul
 
